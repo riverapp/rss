@@ -24,15 +24,11 @@ class RSS
 			}
 	
 	update: (user, callback) ->
-		console.log('Updating Feed...')
 		HTTP.request {
 			url: user.secret
 		}, (err, response) =>
-			console.log('Got update')
 			if err
-				console.log('ERROR')
 				return callback(err, null)
-			console.log('No Error')
 			parser = new DOMParser()
 			doc = parser.parseFromString(response, 'text/xml')
 			xmlArticles = doc.evaluate('/rss/channel/item', doc, null, XPathResult.ANY_TYPE, null)
@@ -43,7 +39,6 @@ class RSS
 				article.subject = feedTitle
 				article.action = @getSafeNodeContent(doc, xmlArticle, 'title/text()')
 				article.id = @getSafeNodeContent(doc, xmlArticle, 'guid/text()')
-				console.log(article)
 				articles.push(article)
 			callback(null, articles)
 
