@@ -35,9 +35,9 @@ class RSS
 			articles = []
 			feedTitle = @parseTitleFromFeed(user.secret, response)
 			while xmlArticle = xmlArticles.iterateNext()
-				article = new Notification()
-				article.subject = feedTitle
-				article.action = @getSafeNodeContent(doc, xmlArticle, 'title/text()')
+				article = new Link()
+				article.title = @getSafeNodeContent(doc, xmlArticle, 'title/text()')
+				article.link = @getSafeNodeContent(doc, xmlArticle, 'link/text()')
 				article.id = @getSafeNodeContent(doc, xmlArticle, 'guid/text()')
 				articles.push(article)
 			callback(null, articles)
