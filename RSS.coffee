@@ -16,7 +16,7 @@ class RSS
 			authType: 'basic',
 			fields: [
 				{
-					name: 'Feed URL',
+					label: 'Feed URL',
 					type: 'url',
 					identifier: 'url'
 				}
